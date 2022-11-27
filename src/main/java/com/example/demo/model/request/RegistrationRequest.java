@@ -7,8 +7,8 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class RegistrationRequest {
-    private final String firstName;
-    private final String lastName;
-    private final String email;
-    private final String password;
+    private String userName;
+//    private final String lastName;
+    private String email;
+    private  String password;
 }

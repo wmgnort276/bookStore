@@ -6,4 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 //@Data
 public class BaseBusiness {
+    @Autowired
+    protected MapperFacade mapper;
 }

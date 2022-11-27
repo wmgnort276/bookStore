@@ -23,6 +23,10 @@ public class BookController {
     public List<BookResponse> getAll(){
         return bookBusiness.getAll();
     }
+    @GetMapping(value = "/{id}")
+    public BookResponse getById(@PathVariable Integer id){
+        return bookBusiness.getByID(id);
+    }
     @DeleteMapping(value = "/{id}")
     public void deleteBook(@PathVariable Integer id){
         bookBusiness.deleteBook(id);

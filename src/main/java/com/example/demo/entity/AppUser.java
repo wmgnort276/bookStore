@@ -24,10 +24,17 @@ public class AppUser extends BaseEntity implements UserDetails {
     private String email;
     @Enumerated(EnumType.STRING)
     private UserRole appUserRole;
-    private Boolean userLocked;
-    private Boolean userEnabled;
+    private Boolean userLocked = false;
+    private Boolean userEnabled = false;
     private LocalDateTime createTime;
     private LocalDateTime modifiedTime;
+
+    public AppUser(String userName, String email, String password, UserRole userRole) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.appUserRole = userRole;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -41,7 +48,7 @@ public class AppUser extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.email;
     }
 
     @Override

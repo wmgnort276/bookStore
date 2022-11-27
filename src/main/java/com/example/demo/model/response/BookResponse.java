@@ -15,6 +15,7 @@ public class BookResponse {
     private Integer bookCatId;
     private String bookName;
     private String bookAuthor;
+    private Integer unitPrice;
     @JsonFormat(pattern = Constants.DATE_TIME_PARTTERN)
     private LocalDateTime createTime;
     @JsonFormat(pattern = Constants.DATE_TIME_PARTTERN)
