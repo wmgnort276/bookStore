@@ -39,7 +39,9 @@ public class RegistrationBusiness {
                         UserRole.USER)
         );
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(),buildEmail(request.getUserName(),link));
+//        emailSender.send(request.getEmail(),buildEmail(request.getUserName(),link));
+       // emailSender.send(request.getEmail(),"Some thing being a text for email");
+        emailSender.send(request.getEmail(), token);
         return token;
 
     }
