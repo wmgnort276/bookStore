@@ -10,15 +10,13 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@EnableScheduling
-@EnableAsync
+
 @SpringBootApplication
-@EnableCaching
+
 public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-
 	}
 
 }

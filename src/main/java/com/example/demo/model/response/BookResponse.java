@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class BookResponse {
     private Integer bookCatId;
     private String bookName;
-    private String bookAuthor;
+    private  String bookAuthor;
     private Integer unitPrice;
     @JsonFormat(pattern = Constants.DATE_TIME_PARTTERN)
     private LocalDateTime createTime;

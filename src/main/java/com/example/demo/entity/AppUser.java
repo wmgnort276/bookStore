@@ -4,70 +4,35 @@ import com.example.demo.common.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class AppUser extends BaseEntity implements UserDetails {
-
+public class AppUser  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
     private String userName;
     private String password;
     private String email;
     @Enumerated(EnumType.STRING)
-    private UserRole appUserRole;
+    private UserRole userRole;
     private Boolean userLocked = false;
     private Boolean userEnabled = false;
     private LocalDateTime createTime;
-    private LocalDateTime modifiedTime;
+    private LocalDateTime modifyTime;
 
-    public AppUser(String userName, String email, String password, UserRole userRole) {
+
+    public AppUser(String userName, String email, String password) {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.appUserRole = userRole;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !this.userLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.userEnabled;
-    }
 }

@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.business.BookBusiness;
-import com.example.demo.entity.BookEntity;
 import com.example.demo.model.response.BookResponse;
 import com.example.demo.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,16 +17,24 @@ public class BookController {
     private BookBusiness bookBusiness;
     @Autowired
     private BookRepository bookRepository;
+
     @GetMapping
-    public List<BookResponse> getAll(){
+    public List<BookResponse> getAll() {
         return bookBusiness.getAll();
     }
+
+    @GetMapping(value = "/all")
+    public String getAllTest() {
+        return bookBusiness.getAllTest();
+    }
+
     @GetMapping(value = "/{id}")
-    public BookResponse getById(@PathVariable Integer id){
+    public BookResponse getById(@PathVariable Integer id) {
         return bookBusiness.getByID(id);
     }
+
     @DeleteMapping(value = "/{id}")
-    public void deleteBook(@PathVariable Integer id){
+    public void deleteBook(@PathVariable Integer id) {
         bookBusiness.deleteBook(id);
     }
 }

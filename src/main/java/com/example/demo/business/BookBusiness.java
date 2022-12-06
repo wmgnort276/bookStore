@@ -8,6 +8,7 @@ import com.example.demo.model.response.BookResponseFilter;
 import com.example.demo.repository.BookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,10 @@ public class BookBusiness extends BaseBusiness {
         );
         BookResponse bookResponse = mapper.map(bookEntity, BookResponse.class);
         return bookResponse;
+    }
+
+    public String getAllTest(){
+        return "The list of book here " + HttpStatus.IM_USED;
     }
 
     public BookResponseFilter filter() {
