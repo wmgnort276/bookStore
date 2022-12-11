@@ -22,6 +22,6 @@ public class BookEntity extends BaseEntity{
     private String bookAuthor;
 //    Check how to map decimal mySql to Java
     private Integer unitPrice;
-    private LocalDateTime createTime = LocalDateTime.now();
-    private LocalDateTime modifiedTime = LocalDateTime.now();
+    private LocalDateTime createTime;
+    private LocalDateTime modifiedTime;
 }
