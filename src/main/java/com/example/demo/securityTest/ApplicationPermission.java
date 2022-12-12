@@ -12,6 +12,4 @@ public enum ApplicationPermission {
         this.permission = permission;
     }
 
-
-
 }
