@@ -25,15 +25,16 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
+    // bellow method run for each request from user that contain token
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try{
             String jwt = parseJwt(request);
             if(jwt != null && jwtUtils.validateJwtToken(jwt)){
-                // Lay user name tra ve doi tuong userDetail
+                // Lay username trong cookie tra ve doi tuong userDetail
                 String userName = jwtUtils.getUserNameFromJwtCookie(jwt);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+                UserDetailsImpl userDetails = userDetailsService.loadUserByUsername(userName);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails,

@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -64,10 +62,9 @@ public class AuthController {
         String role = roles.get(0);
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        role));
+                .body(new UserInfoResponse(userDetails.getUsername(),
+                                            userDetails.getEmail(),
+                                                             role));
     }
 
     @PostMapping("/signup")
@@ -87,12 +84,12 @@ public class AuthController {
         user.setCreateTime(LocalDateTime.now());
         String strRoles = signUpRequest.getRole();
 
-        if(strRoles == null){
+        if (strRoles == null) {
             user.setUserRole(UserRole.USER);
         }
-        if(strRoles == "admin"){
+        if (strRoles == "admin") {
             user.setUserRole(UserRole.ADMIN);
-        }else {
+        } else {
             user.setUserRole(UserRole.USER);
         }
 

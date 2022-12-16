@@ -21,23 +21,22 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class UserDetailsImpl extends BaseEntity implements UserDetails {
-    private String userName;
+    private String username;
     private String email;
-
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserDetailsImpl build(AppUser user){
         List<GrantedAuthority> authorities = new ArrayList<>();
 //        GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole().name());
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole().toString());
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getUserRole().name());
 
         authorities.add(authority);
 
         return new UserDetailsImpl(
                 user.getUserName(),
                 user.getEmail(),
-                user.getUserName(),
+                user.getPassword(),
                 authorities
         );
     }
@@ -54,7 +53,7 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
