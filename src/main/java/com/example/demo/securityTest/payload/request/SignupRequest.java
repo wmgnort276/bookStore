@@ -23,5 +23,4 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 1, max = 40)
     private String password;
-
 }
