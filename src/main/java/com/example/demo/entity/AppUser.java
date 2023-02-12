@@ -2,15 +2,20 @@ package com.example.demo.entity;
 
 import com.example.demo.common.UserRole;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,8 +23,12 @@ public class AppUser  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+    @NotBlank
     private String userName;
+    @NotBlank
     private String password;
+    @Email
+    @NotEmpty(message = "Email is required")
     private String email;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;

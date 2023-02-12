@@ -1,0 +1,138 @@
+Phím tắt vv
+ctrl + shift + a: tìm kiếm (plugin, annotation - dùng để enable annotation )
+- Trong onToMany, dùng Fetch=LAZY thì list<Object con> khi thực hiện transaction sẽ không được gọi tới
+-> không có dữ liệu trả về. Còn nếu fetch = eager thì mặc định khi query đối tượng cha, list object con sẽ
+được query.
+
+- Phân biệt @NotNull, @NotBlank, @NotEmty
+@NotNull: có thể có giá trị rỗng
+@NotEmpty: không thể rỗng, và độ dài đầu vào phải lớn hơn 0. Có thể dùng kết hợp với
+@Size(min = 2, max = 32, message = "Name must be between 2 and 32 characters long")
+@NotBlank : trim() giá trị và kiểm tra không được lớn hơn ko
+
+
+
+0. Java Core
+1. IOC và DI, Bean, Scope, Factory trong Spring
+ioc: inversion of control : tạo các đối tượng, quản lý và cấu hình các đối tượng đó
+https://viblo.asia/p/spring-ioc-inversion-of-control-trong-spring-4P856gJaKY3
+https://stackjava.com/spring/spring-aop-1.html
+
+- Bean: định nghĩa các object trong spring (các module được chia nhỏ)
+- Scope : thời điểm mà mỗi thể hiện của bean được tạo (5 scope )
+- Dùng bean: khai báo trong dependency
+- Application context giống với beans nhưng có thêm tương thích
+với AOP ----  https://viblo.asia/p/spring-ioc-inversion-of-control-trong-spring-4P856gJaKY3
+- Factory được sử dụng để đọc thông tin cấu hình và tạo ra đối tượng
+
+- DI: https://stackjava.com/design-pattern/dependency-injection-di-la-gi.html
+sử dụng file config để quyết xác định đối tượng được inject, hoặc inject theo cách nào
+(constructor-CI hay setMethod-SI)
+
+2. Spring AOP, Spring Core
+- AOP: tách logic thành các phần riêng biệt, quyết định vị trí trong chương trình
+được xử lý, thực thi
+- Đơn vị nhỏ nhất trong AOPP là aspect
+Khai niem
+Join point: là các điểm trong chương trình ví dụ điểm thực thi method (method execution), điểm xử lý excpetion, field access… Spring chỉ hỗ trợ method execution join point
+Advice: một hành động thực hiện ở joint point
+Pointcut: Là expression language giúp khớp nối với joint point
+Introduction: Cho phép introduce các new interface tới bất kì object adviced nào.
+Target Object: Object sẽ được adviced
+Aspect: là một class bao gồm các advice và các joint point
+Interceptor: là một aspect chỉ có duy nhất một advice
+AOP Proxy: dùng để cài đặt các Aspect
+Weaving: là tiến trình nối các aspect với các object, types để tạo nên advised object.
+
+- Phương thức mặc định trong spring (MethodBeforeAdvice là 1 aspect vì có chứa advice, và
+cũng là 1 interceptor vì chỉ chứa 1 advice
+)
+- BeforeAdvice thực hiện 1 advice vào thời điểm trước khi method thực thi, và được gọi
+là AOP proxy vì nó thực thi 1 aspect
+---- Cac kieu advice
+Before advice: chạy trước khi method được thực thi
+After returning advice: Chạy sau khi method trả về một kết quả
+After throwing adivce: Chạy khi method ném ra một exception
+Around advice: Chạy khi method được thực thi (Bao gồm cả 3 loại advice trên)
+
+
+AspepctJS : thư viện thực thi AOP, cung cấp khả năng giống beans nhưng cung cấp
+thêm các annotation (chú thích class được thực hiện ở đâu)
+
+
+
+
+3. Cấu hình tự động của ứng dụng Spring Boot
+
+auto-wing : tự đông tìm bean thích hợp đê inject
+có 5 loại aotu-wing:
+1. auto-wiring no: dùng biến ref đê link
+2. auto-wiring byName
+3. auto-wiring byType
+4. auto-wiring byConstructor
+Note
++ thuộc tính required = false: nếu ko tìm thấy bean phù hợp sẽ trả lại null, nếu để
+true sẽ báo lỗi
++ autowired không sử dụng với dữ liệu nguyên thủy
++ autowired cho phép ghi đè (các thẻ property và constructor-arg sẽ ghi đè autowiring)
+
+anotation: dùng để thêm chức năng cấu hình tự động, đặt ở trước class
+auto-component-scan: sử dụng để tự động inject method mà ko cần định
+nghĩa thẻ beans trong files xml
+
+4. Anotation căn bản
+- @SpringBootApplication
+- @Component
+- @Controller, @RestController, @ResponseBody
+- @Service
+- @Repository- @ComponentScan- @Configuration
+- @Bean, @Conditional, @Lazy, @Primary, @Qualifier, @DependsOn
+- @Autowired
+- @Value
+- @Transactional, @Query, @Modifying
+- @RequestParam, @RequestBody, @PathVariable, @RequestHeader
+- @RequestMapping, @PostMapping, @GetMapping, @PutMapping, @DeleteMapping
+- Các annotation dùng để kiểm tra dữ liệu @Valid, @NotNull, @Nullable, @Length,...
+
+
+------------- Tìm hiểu------------
+@Component : đánh dấu class được tự động inject
+@Repository, @Service, @Controller : đánh dấu object được sử dụng ở những tầng khác nhau
+@EnableAutoConfiguration dùng cùng @Configuration
+
+----------------------------------------------------------------------
+5. Cấu hình biến môi trường, các thuộc tính trong ứng dụng Spring
+- application.properties
+ file riêng biệt chứa thông tin chung về cấu hình -> dễ dàng quản lý sự thay đổi
+-> không cần phải fix cứng trong bean
+
+- application.yml
+
+6. Cấu hình profiles cho ứng dụng Spring Boot: Dev, Test, Prod
+
+7. Mô hình lớp trong Spring Boot
+- Lớp Controller
+- Lớp Service(Business Logic)
+- Lớp Repository(Persistence)
+
+8. Xây dựng Interface và mô hình đa kế thừa Service
+9. Giao tiếp với cơ sở dữ liệu SQL
+- Hibernate
+- JPA
+- Mapping entity với table trong cơ sở dữ liệu
+10. Các xử lý nâng cao trong giao tiếp cơ sở dữ liệu
+- Criteria và Query Builder
+- Phân trang
+- Sort nhiều điều kiện
+- Specification
+- Native query và sử dụng template
+11. Xử lý lỗi trong ứng dụng và cách trả lỗi về Client
+- Exception Handler
+- Trả về lỗi theo HttpStatus
+- Trả về lỗi theo Custom Status
+12. Chạy lịch @Schedule
+13. Xử lý sự kiện và bất đồng bộ
+- EventListener
+- Async
+14. Cơ bản Security
+15. Ghi log trong Spring Boot
